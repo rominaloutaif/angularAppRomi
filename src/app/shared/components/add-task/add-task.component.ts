@@ -17,7 +17,24 @@ export class AddTaskComponent implements OnInit {
   constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
-    //this.buildForm();
+    this.buildForm();
+  }
+
+  buildForm():void{
+      this.newTaskForm = new FormGroup({
+        title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+        description: new FormControl(null),
+        date: new FormControl(null),
+        deadline: new FormControl('', [Validators.required])    
+      })
+  }
+
+  public confirmTask():void{
+    this.newTaskForm.get('date').setValue(new Date());
+    //this.newTask.emit(this.newTaskForm.value);
+    console.log(this.newTaskForm.value);
+    this.modalRef.hide();
+    this.newTaskForm.reset();
   }
 
   public openAddModal(template: TemplateRef<any>):void{
