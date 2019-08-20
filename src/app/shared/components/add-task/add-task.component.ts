@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, Output } from '@angular/core';
+import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Task} from '../../interfaces/task';
 
 @Component({
   selector: 'app-add-task',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddTaskComponent implements OnInit {
 
-  constructor() { }
+  public modalRef: BsModalRef;
+  public newTaskForm: FormGroup;
+  //@Output() newTask = new EventEmitter<task>();
+
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
+    //this.buildForm();
   }
 
+  public openAddModal(template: TemplateRef<any>):void{
+    this.modalRef=this.modalService.show(template);
+  }
 }
